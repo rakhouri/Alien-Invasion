@@ -7,8 +7,10 @@ class AlienInvasion:
 
     def __init__(self):
         """Intializes the game, and create game resources."""
+        # Initializes the background settings that Pygame needs to work properly.
         pygame.init()
 
+        # Creates a display window.
         self.screen = pygame.display.set_mode((1200, 800))
         pygame.display.set_caption("Alien Invasion")
 
@@ -17,6 +19,7 @@ class AlienInvasion:
         while True:
             # Watch for keyboard and mouse events.
             for event in pygame.event.get():
+                # If the user clicks the game window close button, the game is exited.
                 if event.type == pygame.QUIT:
                     sys.exit()
 

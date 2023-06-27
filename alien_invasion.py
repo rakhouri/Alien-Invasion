@@ -20,7 +20,8 @@ class AlienInvasion:
 
         # Creates a display window.
         self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
@@ -86,6 +87,20 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+        self._check_bullet_alien_collisions()
+        
+    def _check_bullet_alien_collisions(self):
+        """Respond to bullet-alien collisions."""
+        # Remove any bullets and aliens that have collided.
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True)
+        
+        if not self.aliens:
+            # Destory existing bullets and create new fleet.
+            self.bullets.empty()
+            self._create_fleet()
+    
     
     def _create_fleet(self):
         """Create the fleet of aliens."""
